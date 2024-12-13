@@ -38,10 +38,13 @@ This repository contains a project focused on detecting safety helmets in images
    - The results are visualized by overlaying the predicted and actual bounding boxes on the input images. The predicted bounding boxes are drawn in yellow, red, or blue, while the actual bounding boxes are shown in green.
 
 
-  ## Requirements:
+## Requirements:
   - Python 3.x
   - PyTorch
   - Albumentations
   - Matplotlib
   - NumPy
   - OpenCV
+
+## Reference:
+https://www.kaggle.com/datasets/andrewmvd/hard-hat-detection/data
