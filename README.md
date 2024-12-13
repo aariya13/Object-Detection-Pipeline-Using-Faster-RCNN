@@ -1,61 +1,47 @@
-# Customer-Segmentation-and-Transaction-Analysis
+# Object-Detection-Pipeline-Using-Faster-RCNN
 
-# Overview
-This project demonstrates how to use machine learning (ML) techniques for customer segmentation and transaction analysis, enabling businesses to derive actionable insights for improved decision-making. The goal is to process transaction data and apply clustering methods like K-Means and DBSCAN to identify customer segments based on their spending behavior and purchase patterns.
+This repository contains a project focused on detecting safety helmets in images using an object detection model built with **PyTorch** Faster RCNN model. The project involves creating a custom dataset, training a model for object detection, and then validating the model using real-world images. The model can identify whether workers are wearing helmets in various scenarios, an important task for workplace safety monitoring.
 
-By understanding customer behavior, businesses can tailor marketing strategies, improve customer retention, and optimize product offerings. The project uses invoice data to create customer-level data and then applies clustering techniques to uncover patterns in the data.
+## Key Components:
+1. **Dataset**:
+   - The dataset consists of images of workers, either wearing helmets or not, along with corresponding annotations (bounding boxes around helmets).
+   - Images are in PNG format, and annotations are stored in XML files.
 
-# Project Breakdown
- Part 1:
- K-Means Clustering for Customer Segmentation
-In this part, we use K-Means clustering to group customers based on their total spending. The main steps include:
-  Data Preprocessing: Convert transaction data to customer-level data, calculate total spending per customer, and aggregate other relevant features (e.g., first purchase, last purchase, most common location).
-  Feature Scaling: Standardize the spending feature to prepare for clustering.
-  Clustering: Apply K-Means clustering to group customers into distinct segments based on their spending behavior.
-  Analysis: Analyze the resulting clusters to understand the customer segments and generate actionable insights for business strategy.
+2. **Model**:
+   - The project uses a **pre-trained model** (e.g., Faster R-CNN) fine-tuned for helmet detection. 
+   - The model is trained on a custom dataset and detects helmets with high accuracy.
 
+3. **Transformations**:
+   - Custom transformations are applied to the dataset, including resizing and normalization of images for optimal training.
+   - Bounding box coordinates are also transformed alongside the images for data augmentation.
 
-Part 2: 
-DBSCAN Clustering for Identifying Natural Groupings and Outliers
-In this part, we use DBSCAN (Density-Based Spatial Clustering of Applications with Noise) to identify customer segments based on both total spending and purchase intervals. The main steps include:
-Data Preprocessing: Similar to Part 1, but including the calculation of the purchase interval (time between the first and last purchase).
-Feature Scaling: Standardize both the total spending and purchase interval features.
-Clustering with DBSCAN: Use DBSCAN to identify clusters and noise points (outliers).
-Analysis and Visualization: Visualize the clustering results and summarize the findings, including the identification of outliers.
+4. **Training**:
+   - The model is trained using the custom dataset with PyTorch's built-in object detection utilities.
+   - Training includes the use of data augmentation and appropriate loss functions to improve model performance.
 
-# Key Features:
-K-Means Clustering: Groups customers based on spending behavior for targeted marketing.
-DBSCAN Clustering: Detects outliers and identifies clusters with varying densities.
-Customer-Level Aggregation: Transforms transaction-level data into customer-level insights.
-Visualization: Visualize the clustering results with scatter plots.
-
-# Tools and Libraries Used
-Pandas: Data manipulation and aggregation.
-Scikit-learn: Machine learning algorithms (K-Means and DBSCAN), StandardScaler for feature scaling.
-Matplotlib: Data visualization.
-Jupyter Notebooks: (Optional) For interactive analysis and step-by-step code execution.
+5. **Evaluation and Validation**:
+   - The trained model is evaluated on unseen validation data.
+   - Predictions are compared against the ground truth (actual bounding boxes and labels) to assess the model’s performance.
 
 
-# Project Insights
-Customer segmentation is vital for businesses to enhance customer targeting, increase retention, and improve overall profitability.
-The project explores different clustering techniques and demonstrates how to use machine learning for real-world business applications.
-Key insights from the clustering can guide marketing strategies, personalized offers, and business decision-making.
-Contributing
-We welcome contributions! If you'd like to improve the project, feel free to fork the repository, submit pull requests, or open issues to discuss potential improvements.
+## Workflow:
+1. **Load the Best Model**: 
+   - A pre-trained model is loaded along with its weights to make predictions.
+   
+2. **Set a Detection Threshold**: 
+   - The threshold determines the confidence level at which bounding boxes are displayed. Boxes with a score below the threshold are discarded.
 
-# License
-This project is licensed under the MIT License - see the LICENSE file for details.
+3. **Perform Inference**:
+   - The `compare_prediction_with_actual` function is used to run inference on a given image, compare predicted boxes with actual boxes, and visualize the results.
 
-# Explanation:
-Project Overview: The description provides a high-level understanding of the project and its purpose.
-Project Breakdown: This section explains each part of the project (K-Means and DBSCAN) in detail.
-Tools and Libraries Used: Highlights the main tools and libraries used for the analysis.
-Getting Started: Gives clear instructions on how to clone the repo and run the code.
-Project Insights: Provides an overview of what the project achieves and its relevance.
-Contributing: Encourages open-source collaboration.
-License: Includes license information to clarify how others can use or contribute to the project.
-This structure ensures that visitors to your GitHub repository can easily understand the project’s purpose, how to use it, and how they can contribute.
+4. **Visualize Results**:
+   - The results are visualized by overlaying the predicted and actual bounding boxes on the input images. The predicted bounding boxes are drawn in yellow, red, or blue, while the actual bounding boxes are shown in green.
 
 
-
-
+  ## Requirements:
+  - Python 3.x
+  - PyTorch
+  - Albumentations
+  - Matplotlib
+  - NumPy
+  - OpenCV
